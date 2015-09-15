@@ -1,0 +1,23 @@
+<%if @post.errors.any?%>
+<%@post.errors.full_messages.each do |msg| %>
+<%= msg %>
+<%end%>
+<%end%>
+
+
+<% provide(:title, "Add a post") %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@post) do |f| %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %><br/><br/>
+
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control' %>
+
+      <%= f.submit "Create Post", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

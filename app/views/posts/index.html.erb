@@ -1,0 +1,17 @@
+
+
+<%= link_to("Logout",logout_path)%>
+
+<h2>Post Feed</h2>
+<%@posts.all.each do |post|%>
+<%= post.title%><br/>
+<%= post.body%><br/>
+<% user = User.find(post.user_id) rescue nil %>
+Posted by<%=link_to "#{user.name}", user_path(id: user.id)%>
+<% end %>
+<h3>
+  <%=link_to("Add a post",new_post_path)%>
+</h3>
+
+
+

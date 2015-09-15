@@ -1,0 +1,4 @@
+<h3><%= @post.title %></h3>
+<%= @post.body %>
+<% user = User.find(@post.user_id)%>
+Posted by <%= link_to "#{user.name}", user_path(id: user.id)%>

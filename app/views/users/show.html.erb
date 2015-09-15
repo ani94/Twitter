@@ -1,0 +1,8 @@
+<h1><%= @user.name %></h1><br/>
+<%= @user.email %><br/>
+<h2><%= @user.name%>'s Posts</h2>
+Followers <%= @user.followers.count %><br/>
+Following <%= @user.following.count %><br/>
+<%= @user.posts.each do |post| %>
+<%= link_to "#{post.title}", post_path(id: post.id)%>
+<%end%>

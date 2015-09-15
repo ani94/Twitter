@@ -1,0 +1,32 @@
+<%if @user.errors.any?%>
+<%@user.errors.full_messages.each do |msg| %>
+<%= msg %>
+<%end%>
+<%end%>
+
+
+<% provide(:title, "Signup") %>
+<h1>Signup</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>Signup <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
