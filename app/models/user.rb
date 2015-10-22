@@ -1,17 +1,10 @@
-class User
-  include Mongoid::Document
-  include ActiveModel::SecurePassword
-  include Mongoid::Timestamps
-  field :name, type: String
-  field :email, type: String
-  field :password_digest, type: String
+class User < ActiveRecord::Base
   has_secure_password
   has_many :posts , dependent: :destroy
-
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :followed_users
-  has_many :reverse_relationships
-  has_many :followers
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name:  "Relationship", dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
 
   before_save { self.email = email.downcase }
 
@@ -33,7 +26,5 @@ class User
   def following?(other_user)
     followed_users.include?(other_user)
   end
-
-
 
 end
